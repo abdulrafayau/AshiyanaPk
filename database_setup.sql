@@ -15,3 +15,13 @@ CREATE TABLE IF NOT EXISTS properties (
     is_near_market BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS admins (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert the default admin with the password 'project@2026'
+INSERT IGNORE INTO admins (username, password_hash) VALUES ('admin', '$2b$10$i8xGb1y06KcSZNT78eAfHugmk2js3d9kVsTdGGolTUAOwOTdT7B46');

@@ -31,6 +31,8 @@ export class PropertyService {
   }
 
   addProperty(property: Property): Observable<any> {
-    return this.http.post(this.apiUrl, property);
+    const token = localStorage.getItem('adminToken');
+    const headers = { 'Authorization': `Bearer ${token}` };
+    return this.http.post(this.apiUrl, property, { headers });
   }
 }

@@ -2,8 +2,10 @@
   <div class="logo">AshiyanaPk</div>
   <div class="nav-links">
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-    <a routerLink="/add-property" routerLinkActive="active">Add Property</a>
-    <a routerLink="/admin" routerLinkActive="active">Admin Dashboard</a>
+    <a *ngIf="authService.isLoggedIn()" routerLink="/add-property" routerLinkActive="active">Add Property</a>
+    <a *ngIf="authService.isLoggedIn()" routerLink="/admin" routerLinkActive="active">Admin Dashboard</a>
+    <a *ngIf="!authService.isLoggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
+    <a *ngIf="authService.isLoggedIn()" (click)="authService.logout()" style="cursor: pointer;">Logout</a>
   </div>
 </nav>
 
