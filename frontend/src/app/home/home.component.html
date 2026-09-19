@@ -1,0 +1,46 @@
+<div class="home-container">
+  <div class="hero-section">
+    <h1>Find Your Dream Property</h1>
+    <p>Discover houses and flats available for sale and rent.</p>
+    
+    <div class="search-bar">
+      <input type="text" class="input-control" [(ngModel)]="searchQuery" (keyup.enter)="onSearch()" placeholder="Search by location or reference number...">
+      <button class="btn" (click)="onSearch()">Search</button>
+    </div>
+  </div>
+
+  <div class="properties-grid">
+    <div class="property-card" *ngFor="let prop of properties">
+      <div class="card-image">
+        <!-- Placeholder image -->
+        <div class="image-placeholder">{{ prop.property_type }}</div>
+      </div>
+      <div class="card-content">
+        <div class="badge-row">
+          <span class="badge purpose">{{ prop.purpose }}</span>
+          <span class="badge type">{{ prop.property_type }}</span>
+        </div>
+        <h3 class="location">{{ prop.location }}</h3>
+        <p class="details">Ref: {{ prop.reference_number }}</p>
+        
+        <div class="specs">
+          <div class="spec-item">
+            <strong>Area:</strong> {{ prop.area_sqft }} sqft
+          </div>
+          <div class="spec-item" *ngIf="prop.floor_number">
+            <strong>Floor(s):</strong> {{ prop.floor_number }}
+          </div>
+        </div>
+
+        <div class="amenities">
+          <span class="amenity" [class.active]="prop.is_near_market">Market Nearby</span>
+          <span class="amenity" [class.active]="prop.is_near_masjid">Masjid Nearby</span>
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="properties.length === 0" class="no-results">
+      <p>No properties found matching your criteria.</p>
+    </div>
+  </div>
+</div>

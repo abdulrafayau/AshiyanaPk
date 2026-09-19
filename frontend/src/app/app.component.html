@@ -1,0 +1,12 @@
+<nav class="navbar">
+  <div class="logo">AshiyanaPk</div>
+  <div class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a routerLink="/add-property" routerLinkActive="active">Add Property</a>
+    <a routerLink="/admin" routerLinkActive="active">Admin Dashboard</a>
+  </div>
+</nav>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>

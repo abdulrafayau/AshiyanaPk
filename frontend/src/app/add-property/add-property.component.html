@@ -1,0 +1,76 @@
+<div class="form-container">
+  <h2>Add New Property</h2>
+  
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #propertyForm="ngForm">
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label>Property Type</label>
+        <select class="input-control" [(ngModel)]="property.property_type" name="property_type" required>
+          <option value="House">House</option>
+          <option value="Flat">Flat</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Purpose</label>
+        <select class="input-control" [(ngModel)]="property.purpose" name="purpose" required>
+          <option value="Sale">Sale</option>
+          <option value="Rent">Rent</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Plot Number / Address Line</label>
+        <input type="text" class="input-control" [(ngModel)]="property.plot_number" name="plot_number" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Location (City / Area)</label>
+        <input type="text" class="input-control" [(ngModel)]="property.location" name="location" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Total Area (sqft)</label>
+        <input type="number" class="input-control" [(ngModel)]="property.area_sqft" name="area_sqft" required min="1">
+      </div>
+
+      <div class="form-group">
+        <label>Covered Area (sqft) - Optional</label>
+        <input type="number" class="input-control" [(ngModel)]="property.covered_area" name="covered_area">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label *ngIf="property.property_type === 'House'">Number of Floors</label>
+      <label *ngIf="property.property_type === 'Flat'">Floor Number</label>
+      <input type="number" class="input-control" [(ngModel)]="property.floor_number" name="floor_number" required min="1">
+    </div>
+
+    <div class="checkbox-group">
+      <label class="checkbox-label">
+        <input type="checkbox" [(ngModel)]="property.is_near_market" name="is_near_market">
+        Market Nearby
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" [(ngModel)]="property.is_near_masjid" name="is_near_masjid">
+        Masjid Nearby
+      </label>
+    </div>
+
+    <button type="submit" class="btn submit-btn" [disabled]="!propertyForm.form.valid || loading">
+      {{ loading ? 'Saving...' : 'Add Property' }}
+    </button>
+  </form>
+</div>

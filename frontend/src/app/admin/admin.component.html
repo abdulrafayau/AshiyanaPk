@@ -1,0 +1,41 @@
+<div class="admin-container">
+  <div class="admin-header">
+    <h2>Property Dashboard</h2>
+    <div class="search-box">
+      <input type="text" class="input-control" [(ngModel)]="searchQuery" (keyup.enter)="onSearch()" placeholder="Search properties...">
+      <button class="btn" (click)="onSearch()">Search</button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Ref No.</th>
+          <th>Type</th>
+          <th>Purpose</th>
+          <th>Location</th>
+          <th>Area (sqft)</th>
+          <th>Covered Area</th>
+          <th>Added On</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prop of properties">
+          <td>{{ prop.id }}</td>
+          <td><strong>{{ prop.reference_number }}</strong></td>
+          <td><span class="badge" [ngClass]="prop.property_type.toLowerCase()">{{ prop.property_type }}</span></td>
+          <td><span class="badge" [ngClass]="prop.purpose.toLowerCase()">{{ prop.purpose }}</span></td>
+          <td>{{ prop.location }}</td>
+          <td>{{ prop.area_sqft }}</td>
+          <td>{{ prop.covered_area || '-' }}</td>
+          <td>{{ prop.created_at | date:'shortDate' }}</td>
+        </tr>
+        <tr *ngIf="properties.length === 0">
+          <td colspan="8" class="text-center">No properties found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
