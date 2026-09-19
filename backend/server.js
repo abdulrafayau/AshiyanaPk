@@ -117,6 +117,22 @@ app.post('/api/properties', authenticateToken, async (req, res) => {
 
 // Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+
+const initAdmin = async () => {
+    try {
+        const hash = '$2b$10$rb7VMEsaUd5f4s3qztwpDuxgjjCuStPhxDRLI79xI/V9OMms2rgVi';
+        await db.query(`
+            INSERT INTO admins (username, password_hash) 
+            VALUES ('admin', ?) 
+            ON DUPLICATE KEY UPDATE password_hash = ?
+        `, [hash, hash]);
+        console.log('Admin user initialized securely.');
+    } catch (err) {
+        console.error('Failed to initialize admin user:', err);
+    }
+};
+
+app.listen(PORT, async () => {
+    await initAdmin();
     console.log(`Server running on port ${PORT}`);
 });

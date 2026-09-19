@@ -1,6 +1,3 @@
-CREATE DATABASE IF NOT EXISTS real_estate_db;
-USE real_estate_db;
-
 CREATE TABLE IF NOT EXISTS properties (
     id INT AUTO_INCREMENT PRIMARY KEY,
     reference_number VARCHAR(20) UNIQUE NOT NULL,
@@ -24,4 +21,4 @@ CREATE TABLE IF NOT EXISTS admins (
 );
 
 -- Insert the default admin with the password 'project@2026'
-INSERT IGNORE INTO admins (username, password_hash) VALUES ('admin', '$2b$10$i8xGb1y06KcSZNT78eAfHugmk2js3d9kVsTdGGolTUAOwOTdT7B46');
+INSERT IGNORE INTO admins (username, password_hash) VALUES ('admin', '$2b$10$rb7VMEsaUd5f4s3qztwpDuxgjjCuStPhxDRLI79xI/V9OMms2rgVi');
